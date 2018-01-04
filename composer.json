@@ -1,0 +1,33 @@
+{
+  "name": "diohz0r/glpi-fixture-helper",
+  "description": "Tool to generate fake data for develop and testing with GLPI projects & plugins",
+  "minimum-stability": "stable",
+  "license": "GPL 3.0",
+  "authors": [
+    {
+      "name": "Domingo Oropeza",
+      "email": "dioh_@hotmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6",
+    "nelmio/alice": "^2.2||^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "DIOHz0r\\Glpi\\Fixtures\\": "src/"
+    },
+    "exclude-from-classmap": [
+      "Tests/"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DIOHz0r\\Glpi\\Fixtures\\Tests\\": "Tests/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true
+  },
+  "prefer-stable": true
+}
