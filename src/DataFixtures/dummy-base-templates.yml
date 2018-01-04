@@ -1,0 +1,270 @@
+# This file contains the schema and data templates for tables populated by default.
+
+Glpi\Entities:
+    entities_tpl (template):
+        id (unique): <randomNumber()>
+        name (unique): <sentence()>
+        entities_id: ''
+        completename: <sentence()>
+        level: <randomDigitNotNull()>
+        cartridges_alert_repeat: <randomElement([-2, -10, 0, 86400, 604800, 2592000])>
+        consumables_alert_repeat: <randomElement([-2, -10, 0, 86400, 604800, 2592000])>
+        use_licenses_alert: <randomElement([-2, 0, 1])>
+        send_licenses_alert_before_delay: <randomElement([-2, 0])>
+        use_certificates_alert: <randomElement([-2, 0, 1])>
+        send_certificates_alert_before_delay: <randomElement([-2, 0])>
+        use_contracts_alert: <randomElement([-2, 0, 1])>
+        send_contracts_alert_before_delay: <randomElement([-2, 0])>
+        use_infocoms_alert: <randomElement([-2, 0, 1])>
+        send_infocoms_alert_before_delay: <randomElement([-2, 0])>
+        use_reservations_alert: <randomElement([-2, 0])>
+        autoclose_delay: <randomElement([-2, -10, 0])>
+        notclosed_delay: <randomElement([-2, 0])>
+        calendars_id: <randomElement([-2, 0, 1])>
+        auto_assign_mode: <randomElement([-2, -10, 1, 2])>
+        tickettype: <randomElement([-2, 1, 2])>
+        inquest_config: <randomElement([-2, 1, 2])>
+        inquest_rate: <randomElement([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])>
+        inquest_delay: <randomElement([-10, 0])>
+        autofill_warranty_date: <randomElement([-2, 0, 2, 3, 4])>
+        autofill_use_date: <randomElement([-2, 0, 1, 2, 3, 4])>
+        autofill_buy_date: <randomElement([-2, 0, 1, 3, 4])>
+        autofill_delivery_date: <randomElement([-2, 0, 1, 2, 3])>
+        autofill_order_date: <randomElement([-2, 0, 1, 2, 4])>
+        tickettemplates_id: <randomElement([-2, 1])>
+        entities_id_software: <randomElement([-2, -10])>
+        default_contract_alert: <randomElement([-2, 0, 4, 8, 12, 64, 72])>
+        default_infocom_alert: <randomElement([-2, 0, 4])>
+        default_cartridges_alarm_threshold: <randomElement([-2, 0, 10])>
+        default_consumables_alarm_threshold: <randomElement([-2, 0, 10])>
+        delay_send_emails: <randomElement([-2, 0])>
+        is_notif_enable_default: <randomElement([-2, 0, 1])>
+        autofill_decommission_date: <randomElement([-2, 0])>
+
+Glpi\Blacklists:
+    blacklists_tpl (template):
+        type: <numberBetween(0,5)>
+        name: <word()>
+
+Glpi\Calendars:
+    calendars_tpl (template):
+        name: <word()>
+        is_recursive: <boolean()>
+        comment: <sentence()>
+
+Glpi\Calendarsegments:
+    calendarsegments_tpl (template):
+        calendars_id: '@calendars*'
+        entities_id: '@entities*'
+        is_recursive: <boolean()>
+        day: <numberBetween(0,6)>
+        begin: <time('H:i:s', '11:59:59')>
+        end: <time('H:i:s', '23:59:59')>
+
+Glpi\Configs:
+    configs_tpl (template):
+        context: <word()>
+        name: <bothify($context.'_'.word().'_?#')>
+
+Glpi\Crontasks:
+    crontasks_tpl (template):
+        itemtype (unique): <word()>
+        name (unique): <word()>
+        frequency: <randomNumber()>
+        state: <numberBetween(0,2)>
+        mode: <numberBetween(1,2)>
+        allowmode: <numberBetween(1,3)>
+        hourmin: <numberBetween(0,24)>
+        hourmax: <numberBetween($hourmin,24)>
+        logs_lifetime: <numberBetween(0,60)>
+
+Glpi\Devicememorytypes:
+    devicememorytypes_tpl (template):
+        name: <word()>
+
+Glpi\Devicesimcardtypes:
+    devicesimcardtypes_tpl (template):
+        name: <word()>
+
+Glpi\Displaypreferences:
+    displaypreferences_tpl (template):
+        itemtype (unique): <word()>
+
+Glpi\Documenttypes:
+    documenttypes_tpl (template):
+        name: <word()>
+        ext (unique): <fileExtension()>
+        icon: $ext.'-dist.png'
+        mime: <mimeType()>
+
+Glpi\Filesystems:
+    filesystems_tpl (template):
+        name: <word()>
+
+Glpi\Interfacetypes:
+    interfacetypes_tpl (template):
+        name: <word()>
+
+Glpi\Notifications:
+    notifications_tpl (template):
+        name: <sentence()>
+        entities_id: '@entities*'
+        itemtype: <randomElement([
+                  'CartridgeItem',
+                  'Certificate',
+                  'Change',
+                  'ConsumableItem',
+                  'Contract',
+                  'Crontask',
+                  'DBConnection',
+                  'FieldUnicity',
+                  'Infocom',
+                  'MailCollector',
+                  'ObjectLock',
+                  'PlanningRecall',
+                  'Problem',
+                  'Project',
+                  'ProjectTask',
+                  'Reservation',
+                  'SavedSearch_Alert',
+                  'SoftwareLicense',
+                  'Ticket',
+                  'User',
+                  ])>
+        event: <word()>
+        is_recursive: <boolean()>
+        is_active: <boolean()>
+
+Glpi\NotificationsNotificationtemplates:
+    notifications_notificationtemplates_tpl (template):
+        notifications_id: '@notifications*'
+        mode: <randomElement(['mailing', 'ajax', 'websocket', 'sms', 'xmppm', 'irc'])>
+        notificationtemplates_id: '@notificationtemplates'
+
+Glpi\Notificationtargets:
+    notificationtargets_tpl (template):
+        items_id: <randomElement([1, 3, 5, 6, 11, 23])>
+        type: <randomElement([1, 2, 3, 5])>
+        notifications_id: '@notifications*'
+
+Glpi\Notificationtemplates:
+    notificationtemplates_tpl (template):
+        name: <sentence()>
+        itemtype: <randomElement([
+                  'CartridgeItem',
+                  'Certificate',
+                  'Change',
+                  'ConsumableItem',
+                  'Contract',
+                  'Crontask',
+                  'DBConnection',
+                  'FieldUnicity',
+                  'Infocom',
+                  'MailCollector',
+                  'ObjectLock',
+                  'PlanningRecall',
+                  'Problem',
+                  'Project',
+                  'ProjectTask',
+                  'Reservation',
+                  'SavedSearch_Alert',
+                  'SoftwareLicense',
+                  'Ticket',
+                  'User',
+                  ])>
+
+Glpi\Notificationtemplatetranslations:
+    notificationtemplatetranslations_tpl (template):
+        notificationtemplates_id: '@notificationtemplates*'
+        subject: <sentence()>
+        content_text: <text()>
+        content_html: <randomHtml()>
+
+Glpi\Profilerights:
+    profilerights_tpl (template):
+        profiles_id: '@profiles*'
+        name: <word()>
+        rights: <randomElement(0, 1, 3, 5, 20, 31, 32, 33, 96, 97, 127, 129, 159, 161, 255)>
+
+Glpi\Profiles:
+    profiles_tpl (template):
+        name: <word()>
+        interface: <randomElement(['helpdesk', 'central'])>
+        is_default: <boolean()>
+        helpdesk_hardware: <numberBetween(1,3)>
+        helpdesk_item_type: <randomElements([
+                            'Computer',
+                            'Monitor',
+                            'NetworkEquipment',
+                            'Peripheral',
+                            'Phone',
+                            'Printer',
+                            'Software',
+                            ])>
+        ticket_status: '[]'
+        problem_status: '[]'
+
+Glpi\ProfilesUsers:
+    profiles_users_tpl (template):
+        users_id: '@users*'
+        profiles_id: '@profiles*'
+        entities_id: '@entities*'
+        is_recursive: <boolean()>
+        is_dinamic: <boolean()>
+
+Glpi\Projectstates:
+    projectstates_tpl (template):
+        name: <word()>
+        color: <hexcolor()>
+        is_finished: <boolean()>
+
+Glpi\Requesttypes:
+    requesttypes_tpl (template):
+        name: <word()>
+        is_helpdesk_default: <boolean()>
+        is_followup_default: <boolean()>
+        is_mail_default: <boolean()>
+        is_mailfollowup_default: <boolean()>
+        is_active: <boolean()>
+        is_ticketheader: <boolean()>
+        is_ticketfollowup: <boolean()>
+
+Glpi\Ruleactions:
+    ruleactions_tpl (template):
+        rules_id: '@rules*'
+        action_type: <randomElement([
+                    'assign',
+                    'append',
+                    'regex_result,',
+                    'append_regex_result',
+                    'affectbyip',
+                    'affectbyfqdn',
+                    'affectbymac',
+                    'compute',
+                    'send',
+                    'add_validation',
+                    'fromuser',
+                    'fromitem',
+                    ])>
+
+Glpi\Rulecriterias:
+    rulecriterias_tpl (template):
+        rules_id: '@rules*'
+        # TODO: finish this definition
+
+Glpi\Transfers:
+    transfers_tpl (template):
+        name: <word()>
+
+Glpi\Users:
+    users_tpl (template):
+        name (unique): <word()>
+        password: $name
+        is_active: <boolean()>
+        is_deleted: <boolean()>
+        profiles_id: '@profiles*'
+        entities_id: '@entities*'
+
+Glpi\Devicefirmwaretypes:
+    devicefirmwaretypes_tpl (template):
+        name: <word()>
