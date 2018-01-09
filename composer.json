@@ -12,19 +12,21 @@
   "require": {
     "php": ">=5.6",
     "nelmio/alice": "^2.2||^3.0",
-    "symfony/console": "^3||^4"
+    "symfony/console": "^3||^4",
+    "symfony/finder": "^3.3||^4.0",
+    "php-di/php-di": "^5.4"
   },
   "autoload": {
     "psr-4": {
       "DIOHz0r\\Glpi\\Fixtures\\": "src/"
     },
     "exclude-from-classmap": [
-      "Tests/"
+      "src/Tests/"
     ]
   },
   "autoload-dev": {
     "psr-4": {
-      "DIOHz0r\\Glpi\\Fixtures\\Tests\\": "Tests/"
+      "DIOHz0r\\Glpi\\Fixtures\\Tests\\": "src/Tests/"
     }
   },
   "config": {
