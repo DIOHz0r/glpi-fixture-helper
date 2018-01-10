@@ -51,6 +51,6 @@ class Loader implements LoaderInterface {
       $purgeWithTruncate
    ) {
       $purgeMode = (true === $purgeWithTruncate) ? true : false;
-      return $loader->load($files, [], $purgeMode);
+      return $loader->load($manager, $files, $purgeMode);
    }
 }
