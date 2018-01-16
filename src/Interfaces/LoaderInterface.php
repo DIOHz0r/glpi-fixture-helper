@@ -9,8 +9,14 @@ interface LoaderInterface {
     *
     * @param DatabaseManagerInterface $manager Entity Manager used for the loading
     * @param array $directories names in which the fixtures can be found
+    * @param bool $append
     * @param bool $purgeWithTruncate
     * @return object[] Loaded objects
     */
-   public function load(DatabaseManagerInterface $manager, array $directories, $purgeWithTruncate);
+   public function load(
+      DatabaseManagerInterface $manager,
+      array $directories,
+      $append,
+      $purgeWithTruncate
+   );
 }
