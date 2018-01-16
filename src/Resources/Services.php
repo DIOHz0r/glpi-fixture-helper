@@ -10,8 +10,11 @@ use DIOHz0r\Glpi\Fixtures\Interfaces\LoaderInterface;
 use DIOHz0r\Glpi\Fixtures\Loader;
 
 return [
-   FixtureLoadCommand::class => object()->constructorParameter('name','glpi:fixtures:load'),
+   FixtureLoadCommand::class       => object()
+      ->constructorParameter('name', 'glpi:fixtures:load'),
    DatabaseManagerInterface::class => object(DatabaseManager::class),
-   LoaderInterface::class => object(Loader::class),
-   FixtureLocatorInterface::class => object(FixtureLocator::class),
+   LoaderInterface::class          => object(Loader::class),
+   FixtureLocatorInterface::class  => object(FixtureLocator::class)
+      ->constructorParameter('fixturePath', 'src/DataFixtures')
+      ->constructorParameter('rootDirs', []),
 ];
